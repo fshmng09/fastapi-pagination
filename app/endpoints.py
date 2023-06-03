@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi_pagination import Page, Params
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, joinedload, subqueryload, selectinload
 import schema, models, deps
 from database import engine
 from fastapi_pagination.ext.sqlalchemy import paginate
@@ -63,10 +63,43 @@ def get_joined_users(skip: int = 0, limit: int = 100, db: Session = Depends(deps
     print_for_check_query(users)
     return users
 
+@api_router.get("/subquery-users", response_model=List[schema.User])
+def get_joined_users(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
+    users = db.query(models.User).options(
+        subqueryload(models.User.todos)
+    ).offset(skip).limit(limit).all()
+    print_for_check_query(users)
+    return users
+
+@api_router.get("/selectin-users", response_model=List[schema.User])
+def get_joined_users(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
+    users = db.query(models.User).options(
+        selectinload(models.User.todos)
+    ).offset(skip).limit(limit).all()
+    print_for_check_query(users)
+    return users
+
 @api_router.get("/paged-joined-user", response_model=Page[schema.User])
 def get_paged_joined_users(db: Session = Depends(deps.get_db), params: Params = Depends()) -> Page[schema.User]:
     paged_users = paginate(db.query(models.User).options(
         joinedload(models.User.todos)
+    ), params)
+    print_for_check_query(paged_users.items)
+    return paged_users
+
+@api_router.get("/paged-subquery-user", response_model=Page[schema.User])
+def get_paged_joined_users(db: Session = Depends(deps.get_db), params: Params = Depends()) -> Page[schema.User]:
+    paged_users = paginate(db.query(models.User).options(
+        subqueryload(models.User.todos)
+    ), params)
+    print_for_check_query(paged_users.items)
+    return paged_users
+
+
+@api_router.get("/paged-selectin-user", response_model=Page[schema.User])
+def get_paged_joined_users(db: Session = Depends(deps.get_db), params: Params = Depends()) -> Page[schema.User]:
+    paged_users = paginate(db.query(models.User).options(
+        selectinload(models.User.todos)
     ), params)
     print_for_check_query(paged_users.items)
     return paged_users

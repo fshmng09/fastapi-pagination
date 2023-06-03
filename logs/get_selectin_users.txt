@@ -1,0 +1,15 @@
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT users.id AS users_id, users.name AS users_name 
+fastapi-pagination-fastapi-1  | FROM users
+fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT todos.user_id AS todos_user_id, todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status 
+fastapi-pagination-fastapi-1  | FROM todos 
+fastapi-pagination-fastapi-1  | WHERE todos.user_id IN (__[POSTCOMPILE_primary_keys])
+fastapi-pagination-fastapi-1  | test-user-1
+fastapi-pagination-fastapi-1  | test-user-1 Task 1
+fastapi-pagination-fastapi-1  | test-user-1 Task 2
+fastapi-pagination-fastapi-1  | test-user-2
+fastapi-pagination-fastapi-1  | test-user-2 Task 1
+fastapi-pagination-fastapi-1  | test-user-2 Task 2
+fastapi-pagination-fastapi-1  | INFO:     192.168.80.1:42808 - "GET /selectin-users?skip=0&limit=100 HTTP/1.1" 200 OK

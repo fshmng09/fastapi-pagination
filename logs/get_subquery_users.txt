@@ -1,0 +1,23 @@
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT users.id AS users_id, users.name AS users_name 
+fastapi-pagination-fastapi-1  | FROM users 
+fastapi-pagination-fastapi-1  | WHERE users.name = :name_1
+fastapi-pagination-fastapi-1  |  LIMIT :param_1
+fastapi-pagination-fastapi-1  | INFO:     192.168.80.1:43510 - "GET /docs HTTP/1.1" 200 OK
+fastapi-pagination-fastapi-1  | INFO:     192.168.80.1:43510 - "GET /openapi.json HTTP/1.1" 200 OK
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT users.id AS users_id, users.name AS users_name 
+fastapi-pagination-fastapi-1  | FROM users
+fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status, todos.user_id AS todos_user_id, anon_1.users_id AS anon_1_users_id 
+fastapi-pagination-fastapi-1  | FROM (SELECT users.id AS users_id 
+fastapi-pagination-fastapi-1  | FROM users
+fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2) AS anon_1 JOIN todos ON anon_1.users_id = todos.user_id
+fastapi-pagination-fastapi-1  | test-user-1
+fastapi-pagination-fastapi-1  | test-user-1 Task 1
+fastapi-pagination-fastapi-1  | test-user-1 Task 2
+fastapi-pagination-fastapi-1  | test-user-2
+fastapi-pagination-fastapi-1  | test-user-2 Task 1
+fastapi-pagination-fastapi-1  | test-user-2 Task 2
+fastapi-pagination-fastapi-1  | INFO:     192.168.80.1:43496 - "GET /subquery-users?skip=0&limit=100 HTTP/1.1" 200 OK
