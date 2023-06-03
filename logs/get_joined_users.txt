@@ -1,22 +1,12 @@
 fastapi-pagination-fastapi-1  | ##########
-fastapi-pagination-fastapi-1  | SELECT count(*) AS count_1 
-fastapi-pagination-fastapi-1  | FROM (SELECT users.id AS id, users.name AS name 
-fastapi-pagination-fastapi-1  | FROM users) AS anon_1
-fastapi-pagination-fastapi-1  | ##########
-fastapi-pagination-fastapi-1  | SELECT users.id AS users_id, users.name AS users_name 
+fastapi-pagination-fastapi-1  | SELECT anon_1.users_id AS anon_1_users_id, anon_1.users_name AS anon_1_users_name, todos_1.id AS todos_1_id, todos_1.title AS todos_1_title, todos_1.status AS todos_1_status, todos_1.user_id AS todos_1_user_id 
+fastapi-pagination-fastapi-1  | FROM (SELECT users.id AS users_id, users.name AS users_name 
 fastapi-pagination-fastapi-1  | FROM users
-fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2
+fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2) AS anon_1 LEFT OUTER JOIN todos AS todos_1 ON anon_1.users_id = todos_1.user_id
 fastapi-pagination-fastapi-1  | test-user-1
-fastapi-pagination-fastapi-1  | ##########
-fastapi-pagination-fastapi-1  | SELECT todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status, todos.user_id AS todos_user_id 
-fastapi-pagination-fastapi-1  | FROM todos 
-fastapi-pagination-fastapi-1  | WHERE :param_1 = todos.user_id
 fastapi-pagination-fastapi-1  | test-user-1 Task 1
 fastapi-pagination-fastapi-1  | test-user-1 Task 2
 fastapi-pagination-fastapi-1  | test-user-2
-fastapi-pagination-fastapi-1  | ##########
-fastapi-pagination-fastapi-1  | SELECT todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status, todos.user_id AS todos_user_id 
-fastapi-pagination-fastapi-1  | FROM todos 
-fastapi-pagination-fastapi-1  | WHERE :param_1 = todos.user_id
 fastapi-pagination-fastapi-1  | test-user-2 Task 1
 fastapi-pagination-fastapi-1  | test-user-2 Task 2
+fastapi-pagination-fastapi-1  | INFO:     192.168.80.1:59740 - "GET /joined-users?skip=0&limit=100 HTTP/1.1" 200 OK
