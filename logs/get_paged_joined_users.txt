@@ -1,0 +1,22 @@
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT count(*) AS count_1 
+fastapi-pagination-fastapi-1  | FROM (SELECT users.id AS id, users.name AS name 
+fastapi-pagination-fastapi-1  | FROM users) AS anon_1
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT users.id AS users_id, users.name AS users_name 
+fastapi-pagination-fastapi-1  | FROM users
+fastapi-pagination-fastapi-1  |  LIMIT :param_1 OFFSET :param_2
+fastapi-pagination-fastapi-1  | test-user-1
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status, todos.user_id AS todos_user_id 
+fastapi-pagination-fastapi-1  | FROM todos 
+fastapi-pagination-fastapi-1  | WHERE :param_1 = todos.user_id
+fastapi-pagination-fastapi-1  | test-user-1 Task 1
+fastapi-pagination-fastapi-1  | test-user-1 Task 2
+fastapi-pagination-fastapi-1  | test-user-2
+fastapi-pagination-fastapi-1  | ##########
+fastapi-pagination-fastapi-1  | SELECT todos.id AS todos_id, todos.title AS todos_title, todos.status AS todos_status, todos.user_id AS todos_user_id 
+fastapi-pagination-fastapi-1  | FROM todos 
+fastapi-pagination-fastapi-1  | WHERE :param_1 = todos.user_id
+fastapi-pagination-fastapi-1  | test-user-2 Task 1
+fastapi-pagination-fastapi-1  | test-user-2 Task 2
